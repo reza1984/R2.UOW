@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0"/>
+    <PackageReference Include="xunit" Version="2.2.0"/>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.AutoHistory" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.0"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\R2.Domain\R2.Domain.csproj"/>
+    <ProjectReference Include="..\R2.Framework.Sample\R2.Framework.Sample.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0"/>
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18"/>
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18"/>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"/>
+  </ItemGroup>
+</Project>

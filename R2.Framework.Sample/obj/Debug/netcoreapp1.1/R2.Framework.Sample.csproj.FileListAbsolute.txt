@@ -1,0 +1,11 @@
+D:\Projects\R2\R2.Framework.Sample\bin\Debug\netcoreapp1.1\R2.Framework.Sample.deps.json
+D:\Projects\R2\R2.Framework.Sample\bin\Debug\netcoreapp1.1\R2.Framework.Sample.dll
+D:\Projects\R2\R2.Framework.Sample\bin\Debug\netcoreapp1.1\R2.Framework.Sample.pdb
+D:\Projects\R2\R2.Framework.Sample\bin\Debug\netcoreapp1.1\R2.Domain.dll
+D:\Projects\R2\R2.Framework.Sample\bin\Debug\netcoreapp1.1\R2.Domain.pdb
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.csprojResolveAssemblyReference.cache
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.AssemblyInfo.cs
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.dll
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.pdb
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.csproj.CoreCompileInputs.cache
+D:\Projects\R2\R2.Framework.Sample\obj\Debug\netcoreapp1.1\R2.Framework.Sample.AssemblyInfoInputs.cache

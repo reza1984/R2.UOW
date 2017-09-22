@@ -1,0 +1,9 @@
+D:\Projects\R2\Framework\R2.Domain\bin\Debug\netcoreapp1.1\R2.Domain.deps.json
+D:\Projects\R2\Framework\R2.Domain\bin\Debug\netcoreapp1.1\R2.Domain.dll
+D:\Projects\R2\Framework\R2.Domain\bin\Debug\netcoreapp1.1\R2.Domain.pdb
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.csprojResolveAssemblyReference.cache
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.AssemblyInfo.cs
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.dll
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.pdb
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\R2\Framework\R2.Domain\obj\Debug\netcoreapp1.1\R2.Domain.AssemblyInfoInputs.cache
