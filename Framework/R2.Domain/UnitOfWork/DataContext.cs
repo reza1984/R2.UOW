@@ -46,16 +46,8 @@ namespace R2.Domain.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            System.AppDomain.CurrentDomain.GetAssemblies().ToList()
-            .ForEach(assemply =>
-            {
-                assemply.GetTypes().Where(x => x.BaseType != null && x.BaseType == (typeof(TAggregate)))
-                .ToList().ForEach(entity =>
-                    {
-                        modelBuilder.Entity(entity.GetType());
-                    });
-            });
-            
+            modelBuilder.DefineTAggregateDbSets();
+            modelBuilder.UseEntityTypeConfiguration();
             base.OnModelCreating(modelBuilder);
         }
     }

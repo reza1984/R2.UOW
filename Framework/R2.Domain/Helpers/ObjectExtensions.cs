@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using R2.Domain.Entity;
 using R2.Domain.Entity.Auditing;
 
 namespace R2.Domain.Helpers
@@ -73,6 +76,84 @@ namespace R2.Domain.Helpers
             };
 
             return pagedList;
+        }
+    }
+
+
+
+
+    public static class ModelBuilderExtensions
+    {
+        private static readonly MethodInfo entityMethod = typeof(ModelBuilder).GetTypeInfo().GetMethods().Single(x => (x.Name == "Entity") && (x.IsGenericMethod == true) && (x.GetParameters().Length == 0));
+
+        private static Type FindEntityType(Type type)
+        {
+            var interfaceType = type.GetInterfaces().First(x => (x.GetTypeInfo().IsGenericType == true) && (x.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
+            return interfaceType.GetGenericArguments().First();
+        }
+
+        private static readonly Dictionary<Assembly, IEnumerable<Type>> configurationTypesPerAssembly = new Dictionary<Assembly, IEnumerable<Type>>();
+        private static readonly Dictionary<Assembly, IEnumerable<Type>> aggregateTypesPerAssembly = new Dictionary<Assembly, IEnumerable<Type>>();
+
+        public static ModelBuilder ApplyConfiguration<T>(this ModelBuilder modelBuilder, IEntityTypeConfiguration<T> configuration) where T : class
+        {
+            var entityType = FindEntityType(configuration.GetType());
+
+            dynamic entityTypeBuilder = entityMethod
+                .MakeGenericMethod(entityType)
+                .Invoke(modelBuilder, new object[0]);
+
+            configuration.Configure(entityTypeBuilder);
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder UseEntityTypeConfiguration(this ModelBuilder modelBuilder)
+        {
+            IEnumerable<Type> configurationTypes;
+            System.AppDomain.CurrentDomain.GetAssemblies().Where(c => !c.IsDynamic).ToList()
+                .ForEach(assembly =>
+                {
+                    if (configurationTypesPerAssembly.TryGetValue(assembly, out configurationTypes) == false)
+                    {
+                        configurationTypesPerAssembly[assembly] = configurationTypes = assembly
+                            .GetExportedTypes()
+                            .Where(x => (x.GetTypeInfo().IsClass == true) && (x.GetTypeInfo().IsAbstract == false) && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true) && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
+                    }
+
+                    var configurations = configurationTypes.Select(x => Activator.CreateInstance(x));
+
+                    foreach (dynamic configuration in configurations)
+                    {
+                        ApplyConfiguration(modelBuilder, configuration);
+                    }
+                });
+
+            return modelBuilder;
+        }
+
+
+        public static ModelBuilder DefineTAggregateDbSets(this ModelBuilder modelBuilder)
+        {
+            IEnumerable<Type> aggregateTypes;
+
+            System.AppDomain.CurrentDomain.GetAssemblies().ToList()
+            .ForEach(assembly =>
+            {
+                if (aggregateTypesPerAssembly.TryGetValue(assembly, out aggregateTypes) == false)
+                {
+                    aggregateTypesPerAssembly[assembly] = aggregateTypes = assembly
+                        .GetTypes().Where(x => x.BaseType != null && x.BaseType == (typeof(TAggregate)));
+                }
+
+                foreach (Type entity in aggregateTypes)
+                {
+                    modelBuilder.Entity(entity);
+                }
+
+            });
+
+            return modelBuilder;
         }
     }
 }
